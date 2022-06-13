@@ -85,7 +85,7 @@ public class Tower : MonoBehaviour
         if (Player.Gold >= upgradeCost)
         {
             range += 5;
-            Player.Gold -= upgradeCost;
+            GameEvents.instance.PlayerGoldUpdate(-1 * upgradeCost);
         }
 
     }
@@ -95,7 +95,7 @@ public class Tower : MonoBehaviour
         if(Player.Gold >= upgradeCost)
         {
             dmgAmount += 5;
-            Player.Gold -= upgradeCost;
+            GameEvents.instance.PlayerGoldUpdate(-1 * upgradeCost);
         }
        
     }

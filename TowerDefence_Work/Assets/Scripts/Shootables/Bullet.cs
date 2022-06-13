@@ -37,7 +37,6 @@ public class Bullet : MonoBehaviour
         {
             HitTarget(target);
         }
-
    
     }
 

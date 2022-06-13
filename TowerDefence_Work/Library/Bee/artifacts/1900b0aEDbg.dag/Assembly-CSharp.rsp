@@ -359,6 +359,7 @@
 "Assets/Scripts/Enemy/Waypoints.cs"
 "Assets/Scripts/Enviroment/Enviroment.cs"
 "Assets/Scripts/Enviroment/EnviromentStats.cs"
+"Assets/Scripts/Game/GameEvents.cs"
 "Assets/Scripts/Game/GameHandler.cs"
 "Assets/Scripts/Game/Player.cs"
 "Assets/Scripts/Game/ShopHandler.cs"

@@ -11,7 +11,8 @@ public class Enemy : MonoBehaviour
     public float speed = 10f;   
     public bool isFlying = false;
     public int goldAmount = 1;
-    
+    public int lifeAmount = -1;
+
     //Moving towards waypoints
     private Transform target;
     private int waypointIndex = 0;
@@ -96,15 +97,16 @@ public class Enemy : MonoBehaviour
 
     private void DestroyEnemy()
     {
-        Player.Lives--;
+        //Player.Lives--;
+        GameEvents.instance.PlayerLiveUpdate(lifeAmount);
         WaveSpawner.EnemiesAlive--;        
         Destroy(gameObject);
     }
   
     private void KillEnemy()
     {       
-        WaveSpawner.EnemiesAlive--;
-        Player.Gold += goldAmount;        
+        WaveSpawner.EnemiesAlive--;    
+        GameEvents.instance.PlayerGoldUpdate(goldAmount);
         Destroy(gameObject);       
     }
 

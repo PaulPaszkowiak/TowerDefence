@@ -156,7 +156,7 @@ public class GridBuilder : MonoBehaviour
                 //Set the placed object on our grid
                 gridObject.SetTransform(builtTransform);
                 //reduce player gold by towercost
-                Player.Gold -= selectedTransform.GetComponent<Tower>().buildCost;
+                GameEvents.instance.PlayerGoldUpdate(-1 * selectedTransform.GetComponent<Tower>().buildCost);
             }
             else
             {
