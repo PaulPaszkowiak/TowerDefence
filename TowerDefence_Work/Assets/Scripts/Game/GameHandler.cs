@@ -26,12 +26,15 @@ public class GameHandler : MonoBehaviour
         public float speed { get; set; }
     }
 
-    //Subscribe to Events
-    private void OnEnable()
+    //Subscribe to Events (Calling start here becouse OnEnable is called before awake)
+    //Alternative checking for "isInitialized"
+    private void Start()
     {
         GameEvents.instance.OnPlayerUpdate += UpdatePlayer;
         GameEvents.instance.OnPlayerLiveUpdate += UpdatePlayerLives;
         GameEvents.instance.OnPlayerGoldUpdate += UpdatePlayerGold;
+        //Init the UI
+        PlayerUIUpdate();
     }
 
     //Unsubscribe to Events
@@ -48,6 +51,7 @@ public class GameHandler : MonoBehaviour
         isGameOver = false;
         storage = new Storage[gameObjectsPrefabArray.Length];
         StateKeeper();
+        
     }
 
     // Update is called once per frame
@@ -92,7 +96,7 @@ public class GameHandler : MonoBehaviour
     {
         for (int i = 0; i < gameObjectsPrefabArray.Length; i++)
         {           
-            storage[i].health = gameObjectsPrefabArray[i].GetComponent<Enemy>().health;
+            storage[i].health = gameObjectsPrefabArray[i].GetComponent<Enemy>().startHealth;
             storage[i].speed = gameObjectsPrefabArray[i].GetComponent<Enemy>().speed;
         }
     }
@@ -110,7 +114,7 @@ public class GameHandler : MonoBehaviour
     {
         for (int i = 0; i < storage.Length; i++)
         {
-            gameObjectsPrefabArray[i].GetComponent<Enemy>().health = storage[i].health;          
+            gameObjectsPrefabArray[i].GetComponent<Enemy>().startHealth = storage[i].health;          
             gameObjectsPrefabArray[i].GetComponent<Enemy>().speed = storage[i].speed;
         }
     }
@@ -144,5 +148,5 @@ public class GameHandler : MonoBehaviour
     {
         textGold.text = Player.Gold.ToString();
     }
-
+   
 }

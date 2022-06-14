@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Enemy : MonoBehaviour
 {
     //Enemy Stats
-    public int health = 100;
+    public int startHealth = 100;
     public float speed = 10f;   
     public bool isFlying = false;
     public int goldAmount = 1;
@@ -20,11 +21,15 @@ public class Enemy : MonoBehaviour
     private float rotationSpeed = 5f;
     private float speedTemp;   
     private float stunDuration = 0f;
-    
+
+    public Image healthBar;
+    private int health;
+
 
     private void Start()
     {
-        speedTemp = speed;        
+        speedTemp = speed;
+        health = startHealth;
 
         //If waypoints exist
         if (Waypoints.waypoints.Length > 0)
@@ -124,6 +129,8 @@ public class Enemy : MonoBehaviour
     {
         //reduce our health
         health -= dmgAmount;
+        //Change Healthui
+        healthBar.fillAmount = (float)health/(float)startHealth;
         //check if we are dead
         if(health <= 0)
         {

@@ -49,4 +49,6 @@ Spielverlauf:
 - Das Towerdefence Spiel kann in einer Endlosschleife gespielt werden solang der Spieler überlebt.
 - Hat der Spieler kein Leben mehr, erscheint ein Game-Over Screen womit er das Spiel beenden oder erneut starten kann.
 
-
+Updates:
+- Ein GameEvent script wurde hinzugefügt um die UI-Updates zu verbessern und um einfaches hinzufügen von neuen Events zu ermöglichen.
+- Healthbars wurden für den Gegnern hinzugefügt um darzustellen wie viel Leben sie im augenblick haben.
