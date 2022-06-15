@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 
@@ -13,6 +14,7 @@ public class Enemy : MonoBehaviour
     public bool isFlying = false;
     public int goldAmount = 1;
     public int lifeAmount = -1;
+    private int health;
 
     //Moving towards waypoints
     private Transform target;
@@ -22,14 +24,18 @@ public class Enemy : MonoBehaviour
     private float speedTemp;   
     private float stunDuration = 0f;
 
+    //UI
     public Image healthBar;
-    private int health;
-
+    public Image healthBarBackGround;   
+    public GameObject dmgGameObject;
+    private GameObject dmgUI;
 
     private void Start()
     {
+        //init
         speedTemp = speed;
         health = startHealth;
+        dmgUI = dmgGameObject;
 
         //If waypoints exist
         if (Waypoints.waypoints.Length > 0)
@@ -83,7 +89,8 @@ public class Enemy : MonoBehaviour
         {
             GetNextWaypoint();
         }
-      
+        //Update healthbarrotation
+        HealthbarRotation();
     }
 
     private void GetNextWaypoint()
@@ -125,17 +132,30 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
     
-    public void TakeDamage(int dmgAmount)
+    public void TakeDamage(int dmgAmount,bool isCriticalHit)
     {
         //reduce our health
         health -= dmgAmount;
         //Change Healthui
-        healthBar.fillAmount = (float)health/(float)startHealth;
-        //check if we are dead
-        if(health <= 0)
+        healthBar.fillAmount = (float)health / (float)startHealth;
+        //Display the Damage
+         
+        if(dmgUI != null)
         {
-            KillEnemy();
+            DamagePoPUp popUp = Instantiate(dmgUI, transform.position, Quaternion.identity).GetComponent<DamagePoPUp>();
+            popUp.SetDamageText(dmgAmount,isCriticalHit);            
         }
+        else
+        {
+            Debug.Log("error");
+        }
+        
+        //check if we are dead
+        if (health <= 0)
+        {
+            KillEnemy();           
+        }
+                
     }
 
     public void GetStunned()
@@ -145,8 +165,15 @@ public class Enemy : MonoBehaviour
 
     public void IncreaseEnemyStregth(int strMult)
     {        
-        speedTemp = speedTemp + speedTemp*strMult*0.1f;
-        health = health * strMult;
+        speed = speed + speed*strMult*0.05f;
+        startHealth = startHealth * strMult;
         goldAmount = goldAmount * strMult;
+    }
+
+
+    private void HealthbarRotation()
+    {
+        healthBar.transform.LookAt(2*transform.position - Camera.main.transform.position);
+        healthBarBackGround.transform.LookAt(2 * transform.position - Camera.main.transform.position);
     }
 }

@@ -45,3 +45,6 @@ TagManager:
   - name: sprites
     uniqueID: 600620939
     locked: 0
+  - name: PopUp
+    uniqueID: 2179146043
+    locked: 0

@@ -40,6 +40,12 @@ public class GameEvents : MonoBehaviour
         OnPlayerGoldUpdate?.Invoke(goldAmount);
     }
 
+    //Event for creating an ui popup notification
+    public event Action<string,Vector3,Color,int> OnPopUp;
+    public void PopUp(string popUpText, Vector3 pos, Color textColor, int iconIndex)
+    {
+        OnPopUp?.Invoke(popUpText, pos, textColor, iconIndex);
+    }
 
 
 }

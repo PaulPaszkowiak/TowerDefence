@@ -111,6 +111,8 @@ MonoBehaviour:
   range: 100
   fireRate: 2
   dmgAmount: 20
+  critChance: 5
+  critDamage: 200
   buildCost: 75
   upgradeCost: 10
 --- !u!1001 &1329348872607749133

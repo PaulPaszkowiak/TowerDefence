@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     private int damage = 50;
     private float aoeRange = 10f;
     private float aoeDMGmultiplier = 0.5f;
+    private bool isCriticalHit;
 
     private void Update()
     {
@@ -45,9 +46,10 @@ public class Bullet : MonoBehaviour
         target = _target;
     }
 
-    public void SetDamage(int dmgAmount)
+    public void SetDamage(int dmgAmount,bool _isCriticalHit)
     {
         damage = dmgAmount;
+        isCriticalHit = _isCriticalHit;
     }
     private void RotateBullet(Vector3 dir)
     {
@@ -81,7 +83,7 @@ public class Bullet : MonoBehaviour
         Enemy enemy = _enemy.GetComponent<Enemy>();
         if(enemy != null)
         {
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(damage,isCriticalHit);
             if (isStun)
                 enemy.GetStunned();
         }

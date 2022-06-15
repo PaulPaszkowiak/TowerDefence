@@ -17,6 +17,8 @@ public class Tower : MonoBehaviour
     public float range = 100f;  
     public float fireRate = 1f;
     public int dmgAmount = 50;
+    public int critChance = 5;
+    public int critDamage = 200;
     public int buildCost = 10;
     public int upgradeCost = 10;
 
@@ -75,7 +77,17 @@ public class Tower : MonoBehaviour
         Bullet bullet = bulletGameObject.GetComponent<Bullet>();
         if(bullet != null)
         {
-            bullet.SetDamage(dmgAmount);
+            bool isCriticalHit = UnityEngine.Random.Range(0, 100) < critChance;
+            float critMulti = 1f;
+            if (isCriticalHit)
+            {
+                critMulti = critDamage / 100;
+            }
+            else
+            {
+                critMulti = 1f;
+            }
+            bullet.SetDamage((int)(dmgAmount*critMulti),isCriticalHit);
             bullet.SetTarget(target);
         }
     }
@@ -86,6 +98,7 @@ public class Tower : MonoBehaviour
         {
             range += 5;
             GameEvents.instance.PlayerGoldUpdate(-1 * upgradeCost);
+            GameEvents.instance.PopUp(upgradeCost.ToString(), transform.position, Color.yellow, 0);
         }
 
     }
@@ -96,6 +109,7 @@ public class Tower : MonoBehaviour
         {
             dmgAmount += 5;
             GameEvents.instance.PlayerGoldUpdate(-1 * upgradeCost);
+            GameEvents.instance.PopUp(upgradeCost.ToString(),transform.position,Color.yellow,0);
         }
        
     }

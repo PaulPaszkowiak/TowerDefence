@@ -12,6 +12,7 @@ public class GameHandler : MonoBehaviour
     private bool isGameOver;
 
     public GameObject ui_GameOver;
+    public GameObject popUpUI;
 
     [SerializeField] GameObject[] gameObjectsPrefabArray;
 
@@ -33,8 +34,9 @@ public class GameHandler : MonoBehaviour
         GameEvents.instance.OnPlayerUpdate += UpdatePlayer;
         GameEvents.instance.OnPlayerLiveUpdate += UpdatePlayerLives;
         GameEvents.instance.OnPlayerGoldUpdate += UpdatePlayerGold;
+        GameEvents.instance.OnPopUp += PopUp;
         //Init the UI
-        PlayerUIUpdate();
+        PlayerUIUpdate();              
     }
 
     //Unsubscribe to Events
@@ -43,6 +45,7 @@ public class GameHandler : MonoBehaviour
         GameEvents.instance.OnPlayerUpdate -= UpdatePlayer;
         GameEvents.instance.OnPlayerLiveUpdate -= UpdatePlayerLives;
         GameEvents.instance.OnPlayerGoldUpdate -= UpdatePlayerGold;
+        GameEvents.instance.OnPopUp -= PopUp;
     }
 
     //caching before start
@@ -149,4 +152,10 @@ public class GameHandler : MonoBehaviour
         textGold.text = Player.Gold.ToString();
     }
    
+    //PopUp
+    private void PopUp(string popUpText , Vector3 pos, Color textColor, int iconIndex)
+    {
+        PopUp popUp = Instantiate(popUpUI, pos, Quaternion.identity).GetComponent<PopUp>();
+        popUp.SetPopUp(popUpText, textColor, iconIndex);
+    }
 }

@@ -1458,7 +1458,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 463394865}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1521,6 +1521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui_GameOver: {fileID: 432473111}
+  popUpUI: {fileID: 1476035406675248097, guid: 84684b3b23c1b664d93d7553175341b4, type: 3}
   gameObjectsPrefabArray:
   - {fileID: 7418739294743454288, guid: 559091ded4c440d4a9033a79408fe1b2, type: 3}
   - {fileID: 1347698789111947833, guid: e6af8c99087184d41b8e81bec54e8156, type: 3}
@@ -2874,7 +2875,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

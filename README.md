@@ -52,3 +52,6 @@ Spielverlauf:
 Updates:
 - Ein GameEvent script wurde hinzugefügt um die UI-Updates zu verbessern und um einfaches hinzufügen von neuen Events zu ermöglichen.
 - Healthbars wurden für den Gegnern hinzugefügt um darzustellen wie viel Leben sie im augenblick haben.
+- Healthbars rotieren nun zur Camera hin.
+- Schadensanzeige für Monster hinzugefügt.
+- PopUps zur visuellen Benachrichtigung des Spielers beim kaufen/bauen/upgraden und nicht platzieren können eines Turms.

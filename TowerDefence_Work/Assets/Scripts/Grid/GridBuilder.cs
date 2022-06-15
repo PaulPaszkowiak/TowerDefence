@@ -157,6 +157,9 @@ public class GridBuilder : MonoBehaviour
                 gridObject.SetTransform(builtTransform);
                 //reduce player gold by towercost
                 GameEvents.instance.PlayerGoldUpdate(-1 * selectedTransform.GetComponent<Tower>().buildCost);
+                //Notify the Player
+                GameEvents.instance.PopUp(selectedTransform.GetComponent<Tower>().buildCost.ToString(), Controller.GetMouseWorldPosition(), Color.yellow, 0);
+                
             }
             else
             {
@@ -164,11 +167,13 @@ public class GridBuilder : MonoBehaviour
                 {
                     //Notify the player visually there is no space
                     Debug.Log("Cant Build here!");
+                    GameEvents.instance.PopUp("Cant Build here!", Controller.GetMouseWorldPosition(), Color.red, 1);
                 }
                 else
                 {
                     //Notify the player visually there is not enough gold
                     Debug.Log("Not enough gold!");
+                    GameEvents.instance.PopUp("Not enough gold!", Controller.GetMouseWorldPosition(), Color.red, 0);
                 }
                 
             }
